@@ -13,7 +13,7 @@ This is for first step to clean data, to modify data in a matrix format
 so that simply use numpy to process it.
 """
 def data2matrix():
-    directory = '/home/byshen/CVST/2015_2'
+    directory = '/home/byshen/CVST/2015_3'
     all_csv = os.listdir(directory+'/occ')
 
     if not os.path.exists(directory + '/new'):
@@ -45,4 +45,4 @@ def read_data():
             print line
 
 
-read_data()
+data2matrix()
