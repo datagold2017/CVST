@@ -18,7 +18,7 @@ font = {'family': 'serif',
         'size': 16,
         }
         
-weekname =['Monday', 'Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
+weekname =['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 def isNaN(num):
     return num != num
     
