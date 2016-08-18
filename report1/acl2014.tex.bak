@@ -1,0 +1,200 @@
+\documentclass[11pt]{article}
+\usepackage{acl2014}
+\usepackage{times}
+\usepackage{url}
+\usepackage{latexsym}
+\usepackage{graphicx}
+\title{Project Report for SJTU AI Class Spring 2016}
+
+\author{Bingyu Shen \\
+  Student ID: 5130309283\\
+ Department of Computer Science \\
+  Shanghai Jiao Tong University\\
+    {\tt sby2013@sjtu.edu.cn}
+}
+
+\date{}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+  This document is the project report for SJTU Artificial Intelligence Class, Spring. In this project, students are required to classify gene data which is a classical question in machine learning area. The raw data is larger than 2.06GB. And in 'E-TABM-185.sdrf.txt', it provides the 5986 samples with specific sample source, material type, characteristics, etc.
+
+  There are mainly two problems to solved in the project. The first problem is to find the most frequently occured disease. In this problem, I use PCA and K-means to analyze the data and give a feasible result. The second problem is a supervised learning problem. The labels is  'Characteristics[DiseaseState]' column in sdrf.txt. In this problem, I use PCA and several different classify methods to classify the data, namely KNN, Random Forest and SVM. I conclude my report with comparisons of these methods and possible improve approaches.
+\end{abstract}
+
+\section{Introduction}
+Gene is the core of biology technology and the most prospective field in the 21st century. Artificial intelligence (AI) is the intelligence exhibited by machines or software. AI is becoming more and more popular in computer science theory fields and has the potential of solving many practical problems. Combining these two topics together makes this project more exciting. Among all the research fields of artificial intelligence, machine learning plays a significant role that how we can get efficient information from large amount of data and how to use these information to predict future data. And machine learning has two fields, including the supervised learning and unsupervised learning aimed at different scenarios.
+
+In this project, I solved two problems with unsupervised learning and supervised learning with different algorithms. The work is listed as below.
+\begin{enumerate}
+\item Unsupervised learning
+    \begin{itemize}
+    \item \textbf{dimention reduction} with PCA and try to use Kernel PCA to get better results.
+    \item \textbf{K-means} is used to classify the data
+    \item find the most frequently occured disease in one cluster 
+    \end{itemize}
+\item Supervised learning
+    \begin{itemize}
+    \item \textbf{dimention reduction} with PCA 
+    \item Use KNN, Random Forest and SVM to classify the data.
+    \item Compare the accuracy of different methods and dimensions of PCA
+    \end{itemize}
+\end{enumerate}
+The rest of this paper is orgranized as follows.
+\section{Method Analysis}
+In this project, the gene chip raw data is a matrix of 22283x5986, where each column is a sample and each row represents a gene data. In  'E-TABM-185.sdrf.txt', it provides other vectors that illustrate the each sample with other feature vectors to describe the disease state.
+
+\subsection{Dimension Reduction}
+Dimension reduction is stressed in our class and is important in the problem. It is the process of reducing the number of random variables using some standards we made. And it can be divided into feature selection and feature extraction.
+
+Feature selection approaches try to find a subset of the original variables (also called features or attributes). There are three strategies; filter (e.g. information gain) and wrapper (e.g. search guided by accuracy) approaches, and embedded (features are selected to add or be removed while building the model based on the prediction errors). See also combinatorial optimization problems.
+
+Feature extraction transforms the data in the high-dimensional space to a space of fewer dimensions. The data transformation may be linear, as in principal component analysis (PCA), but many nonlinear dimensionality reduction techniques also exist. For multidimensional data, tensor representation can be used in dimensionality reduction through multilinear subspace learning.
+
+\subsection{Unsupervised Learning Algorithms}
+Unsupervised learning is the machine learning task of inferring a function to describe hidden structure from unlabeled data. Since the examples given to the learner are unlabeled, there is no error or reward signal to evaluate a potential solution. This distinguishes unsupervised learning from supervised learning and reinforcement learning.
+
+Unsupervised learning clustering algorithms include K-means, Mixture Models, etc. The key of these algorithms are learning latent variables, like EM algorithm. k-means is a variant of EM, with the assumptions that clusters are spherical.
+In K-means. it is hard assign a data point to one particular cluster on convergence. And It makes use of the L2 norm when optimizing (Min {Theta} L2 norm point and its centroid coordinates). While EM soft assigns a point to clusters (so it give a probability of any point belonging to any centroid). It doesn't depend on the L2 norm, but is based on the Expectation, i.e., the probability of the point belonging to a particular cluster. This makes K-means biased towards spherical clusters.
+
+\subsection{Supervised Learning Algorithms}
+Supervised learning is the machine learning task of inferring a function from labeled training data. The training data consist of a set of training examples. In supervised learning, each example is a pair consisting of an input object (typically a vector) and a desired output value (also called the supervisory signal). A supervised learning algorithm analyzes the training data and produces an inferred function, which can be used for mapping new examples. An optimal scenario will allow for the algorithm to correctly determine the class labels for unseen instances. This requires the learning algorithm to generalize from the training data to unseen situations in a "reasonable" way. 
+
+There are four major issues to consider in supervised learning, which are stressed in our class. Bias-variance tradeoff, Function complexity and amount of training data, Dimensionality of the input space, Noise in the output values. All need to be considered to make a good model.
+
+The methods I used in this project are KNN and Random Forest. Random Forest is a popular method in some data mining competitions like Kaggle and Tianchi. And the result proved to be slightly better than KNN. And SVM is used to classify the data. 
+\section{Dimention Reduction}
+\subsection{PCA}
+Principal component analysis (PCA) is a statistical procedure that uses an
+orthogonal transformation to convert a set of observations of possibly correlated
+variables into a set of values of linearly uncorrelated variables called principal
+components. The number of principal components is less than or equal to the number
+of original variables. This transformation is defined in such a way that the first principal component has the largest possible variance (that is, accounts for as much of the variability in the data as possible), and each succeeding component in turn has the highest variance possible under the constraint that it is orthogonal to the preceding components. The resulting vectors are an uncorrelated orthogonal basis set. The principal components are orthogonal because they are the eigenvectors of the covariance matrix, which is symmetric. PCA is sensitive to the relative scaling of the original variables.
+\subsection{Preprocess}
+First of all, we should decompose the dimension of the features. The data is in a matrix format with 22283x5986. 22283 features is too much and may make it hard to  generalize to many data. I first transpose it into 5986x22283 which is fit for the sklearn format. Plus, since the data is too large that there is memory error when I try to do process all the data with PCA, I divide the data with four parts, and combine the result of four parts to do the fifth PCA.
+
+Denote the reliable rate of PCA with different number of principle components($PC$) as $PR$. With the PCA, we can get the Table. \ref{tab1}.
+\begin{table*}[htcp]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+  \hline
+  % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+  PR(\%) & 16 & 26 & 31 & 37 & 41 & 50 & 65 & 75 & 90\\
+  \hline
+  \#PC    & 1  & 2 & 3 & 4 & 5 & 13 & 52 & 168 & 1020\\
+  \hline
+\end{tabular}
+\caption{Reliability(PR) with number of principle components(PC)}\label{tab1}
+\end{table*}
+\subsection{Kernel PCA}
+I also tried to use kernel PCA to divide the data, in order to deal with conditions that data is non-linear. But the result of kernel PCA is not as good as PCA and takes extremely long time. So I omit the discussions on kernel PCA even though it works well on some other conditions.
+
+\section{Clustering with K-means}
+\subsection{K-means Clustering}
+We have learned K-means from class. K-means clustering is a method of vector quantization, originally from signal processing, that is popular for cluster analysis in data mining. k-means clustering aims to partition n observations into k clusters in which each observation belongs to the cluster with the nearest mean, serving as a prototype of the cluster. 
+
+The heuristic algorithms of K-means is similar to the EM algorithm for GMM. However, K-means clustering tends to find clusters of comparable spatial extent, while the expectation-maximization mechanism allows clusters to have different shapes.
+\subsection{Clustering method analysis}
+I first tried to directly cluster the results of PCA with two principle components, but the result show that it can't work. Even though the result is shown that it can be classified somewhat. And the classes I classified with 10 classes still intersect with each other. 
+
+This also gives me the idea that unsupervised learning is hard, because you don't have a standard to compare and it learns not so efficiently.
+
+\subsection{Clustering results and analysis}
+\begin{figure}[htcp]
+  \centering
+  \includegraphics[width=6cm]{oo1.png}\\
+ \caption{Clustering results with 2 principle components and 10 classes}\label{pic1}
+\end{figure}
+
+The expected result is to find the most frequently appeared disease in each cluster. In actual data I used, the top five disease are 'breast tumor',  ¡®acute myeloid leukemia¡¯, ¡®B-cell lymphoma,dlbcl¡¯, ¡®breast cancer¡¯ and ¡®acute lymphoblastic leukemia', 'chemotherapy response¡¯. To compare the result with the actual data, I choose the max five clusters most appeared disease. The most appeared disease in the max five cluster are listed in Table \ref{tab2}.
+\begin{table}[htcp]
+\centering
+\begin{tabular}{|c|c|c|c|}
+  \hline
+  Rank & No. & most appeared disease & Actual Rank \\
+  \hline
+  1 & 489 & breast tumor  & 1\\
+  \hline
+  2 & 380 & breast tumor  & 1\\
+  \hline
+  3 & 375 & acute myeloid leukemia  & 4\\
+  \hline
+  4 & 370 & B-cell lymphoma, dlbcl & 3\\
+  \hline
+  5 & 347 &acute myeloid leukemia & 3\\
+  \hline
+\end{tabular}
+\caption{Top five disease of the max five cluster}\label{tab2}
+\end{table}
+
+Compare the actual rank and the clustered rank in the data, we do find some overlap. But the figure and the table both show that the clustered result is not as good as expected.
+
+From the result we can know that these disease are closely related to each other and use 2 or there principle components can not clearly cluster these data, even though it shows some information about the actual data.
+\section{Classification}
+\subsection{Data Processing}
+The data in this part is directly derived from PCA component analysis. For supervised learning methods, the label is needed. I choose the Characteristics[DiseaseState] as the label. And the index is naturally defined from the order it appears in the data set. And I define the empty as 'unknown', and the index is 0.
+
+It matters a lot to choose a test set. To make sure The data set is randomly divided. I use a random variable with 1/11 chances to get a test sample. So the training data size versus test data size is 10:1.
+
+\subsubsection{KNN}
+In pattern recognition, the k-Nearest Neighbors algorithm (or k-NN for short) is a
+non-parametric method used for classification and regression. In both cases, the input consists of the k closest training examples in the feature space. The output depends on whether k-NN is used for classification or regression:
+\begin{itemize}
+\item  In k-NN classification, the output is a class membership. An object is classified by a majority vote of its neighbors, with the object being assigned to the class most common among its k nearest neighbors (k is a positive integer, typically small). If k = 1, then the object is simply assigned to the class of that single nearest neighbor.
+
+\item In k-NN regression, the output is the property value for the object. This value is the average of the values of its k nearest neighbors
+\end{itemize}
+
+k-NN is a type of instance-based learning, or lazy learning, where the function is only approximated locally and all computation is deferred until classification. The k-NN algorithm is among the simplest of all machine learning algorithms. 
+
+Another problem of KNN is that the unbalanced training data set will make the prediction inaccurate. For example, most label only have less than 100 samples. To deal with this problem, I will introduce  a MIN-MAX method adopted in implementation of libsvm.[1] It uses divide data set to train and vote for prediction method. I will introduce it in detail later.
+
+\subsubsection{KNN results}
+\begin{itemize}
+\item \textbf{Cross Validation}\\
+When choose the K of kNN, a method of cross validation is used to verify the data and choose the best parameter. Cross-validation is a well established technique that can be used to obtain estimates of model parameters that are unknown. Here we discuss the applicability of this technique to estimating k.
+
+The general idea of this method is to divide the data sample into a number of v folds (randomly drawn, disjointed sub-samples or segments). For a fixed value of k, we apply the KNN model to make predictions on the vth segment (i.e., use the v-1 segments as the examples) and evaluate the error.
+
+In the cross validation part, I divided data into four parts and train with 3 parts and predict with 1 part. The result is listed as follows. The dimention I used is the top 100 dimension.
+\begin{table*}[htcp]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|}
+  \hline
+  K & precision 1 & precision 2 & precision 3 &precision 4 & AVG \\
+  \hline
+  1 & 0.79673 & 0.78124 & 0.79245 & 0.78522 & 0.78891\\
+  \hline
+  2 & 0.79464 & 0.79201 & 0.78784 & 0.794112 & 0.79215\\
+  \hline
+  3 & 0.79715 & 0.80451	&0.7958	&0.76454	&0.79051\\
+  \hline
+  4 & 0.79380 &0.75143	&0.78546	&0.76758	&0.77456\\
+  \hline
+  5 & 0.79296 &0.78246 &0.75735	&0.78787	&0.78016 \\
+  \hline
+  10 & 0.77326 &0.76412	&0.74587	&0.76564	&0.76225\\
+  \hline
+  20 &0.73847 &0.74024	&0.74713	&0.73787	&0.74093 \\
+  \hline
+\end{tabular}
+\caption{Cross validation with different k and precision}\label{tab3}
+\end{table*}
+From the Table \ref{tab3}, when k is of value 3, it reaches the highest accuracy.
+\item \textbf{Results}
+I tested KNN which k = 3 with different dimensions. And the accuracy shows that when dimension reaches 75\% reliable rate, which is 168 dimensions, the accuracy is greatest.
+ 
+ \end{itemize}   
+
+
+\section{XML conversion and supported \LaTeX\ packages}
+
+
+
+
+\section*{Acknowledgments}
+
+\section*{References}
+[1]\label{ref1} Q. Ma, B. L. Lu, H. Isahara, "Part of speech tagging with min-max modular neural networks", Proceedings of the IEEE International Conference on Systems, Man and Cybernetics, 1999, 5, pp.356-360
+\end{document}
