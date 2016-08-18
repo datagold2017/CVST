@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2016.4.10)  18 AUG 2016 08:21
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2016.4.10)  18 AUG 2016 09:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -284,7 +284,7 @@ File: omsptm.fd
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10.95> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 55.
 
-<pic1.png, id=33, 845.40843pt x 449.42906pt>
+<pic1.png, id=41, 845.40843pt x 449.42906pt>
 File: pic1.png Graphic file (type png)
  <use pic1.png>
 Package pdftex.def Info: pic1.png used on input line 61.
@@ -294,30 +294,39 @@ Package pdftex.def Info: pic1.png used on input line 61.
 
 
  <./pic1.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 84--85
+Underfull \hbox (badness 10000) in paragraph at lines 87--88
 []\OT1/ptm/m/n/10.95 An on-line ap-proach based on lo-cally
  []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 92.
-[2
 
-]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 92.
+Underfull \hbox (badness 2277) in paragraph at lines 94--95
+[]\OT1/ptm/b/n/10.95 multivariate re-gres-sion \OT1/ptm/m/n/10.95 Some re-gres-
+sion
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 102--103
+[]\OT1/ptm/m/n/10.95 Dynamic Pre-dic-tion of Traf-fic Vol-ume
+ []
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 113.
+[2]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 113.
  (./acl2014.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 92.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 92.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 113.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 113.
 Package rerunfilecheck Info: File `acl2014.out' has not changed.
-(rerunfilecheck)             Checksum: 6F5468A988BEDBE23E8166A0ADBF28FC;432.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 92.
+(rerunfilecheck)             Checksum: FC222E0BDD88A7E41FD04B9835DAE153;519.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 113.
  ) 
 Here is how much of TeX's memory you used:
- 5249 strings out of 493105
- 78008 string characters out of 6137072
+ 5256 strings out of 493105
+ 78069 string characters out of 6137072
  163570 words of memory out of 5000000
- 8641 multiletter control sequences out of 15000+600000
+ 8643 multiletter control sequences out of 15000+600000
  17301 words of font info for 45 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 29i,9n,28p,360b,398s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 29i,9n,28p,380b,398s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/
@@ -326,10 +335,10 @@ ype1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
 lic/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/couri
 er/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><
 /usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
-Output written on acl2014.pdf (2 pages, 104502 bytes).
+Output written on acl2014.pdf (2 pages, 106684 bytes).
 PDF statistics:
- 104 PDF objects out of 1000 (max. 8388607)
- 90 compressed objects within 1 object stream
- 28 named destinations out of 1000 (max. 500000)
- 62 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 117 PDF objects out of 1000 (max. 8388607)
+ 102 compressed objects within 2 object streams
+ 33 named destinations out of 1000 (max. 500000)
+ 78 words of extra memory for PDF output out of 10000 (max. 10000000)
 

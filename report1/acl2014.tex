@@ -5,7 +5,7 @@
 \usepackage{latexsym}
 \usepackage{graphicx}
 \usepackage{hyperref}
-\title{Survey on Traffic Flow prediction}
+\title{Survey on Traffic Flow Prediction}
 
 \author{Bingyu Shen \\
   Student ID: 5130309283\\
@@ -80,6 +80,9 @@ Applied to scenarios that data is of high uncertainty and complex nonlinearity. 
 
 \begin{enumerate}
 	\item Online-SVR for short-term traffic flow prediction under typical and atypical traffic conditions, 2009
+	\item Short-Term Traffic Flow Forecasting: An
+	Experimental Comparison of Time-Series
+	Analysis and Supervised Learning
 	\item Traffic prediction using multivariate nonparametric regression, 2012
 	\item An online approach based on locally weighted learning for short-term traffic flow prediction
 	\item Short-term traffic flow prediction: Neural Network approach
@@ -87,6 +90,24 @@ Applied to scenarios that data is of high uncertainty and complex nonlinearity. 
 	\item Traffic flow prediction with big data: A Deep learning approach
 \end{enumerate}
 
+\begin{itemize}
+	\item \textbf{multivariate regression} Some regression models are used, not so many papers on this method.
+	\item \textbf{SVR } SVR with different kernel are good ways to be compared with. In the second one, it compared time series with different of SVM regression methods. 
+	\item \textbf{NNs} NN become popular since it shows great potential in solving real world problems like face recognition, natural language processing and computer vision. And it seems that deep learning will dominate all machine learning methods in the near future.
+\end{itemize}
+
 \subsection{Kalman Filter}
-Dynamic Prediction of Traffic Volume through Kalman Filtering Theory. 
+\begin{enumerate}
+	\item Adaptive Kalman filter approach for stochastic short-term traffic flow rate prediction and uncertainty quantification, 2014
+	\item Dynamic Prediction of Traffic Volume through Kalman Filtering Theory, 1984
+\end{enumerate}
+The heteroscedastic nature of traffic condition series demands a process variances adaptation mechanism in the Kalman filters.
+\section{Surveys}
+\begin{itemize}
+	\item Traffic Flow Forecast Survey
+	\item Traffic Flow Forecasting: Comparison of Modeling Approaches
+\end{itemize}
+
+\section{Conclusion}
+As far as I know, Long short term memory(LSTM) has not been used on this area. When employing new methods on the data, even if the accuracy is not good enough, we can still write a paper on it and discuss the advantages and disadvanges when compared with exsiting methods. I will implement some of these methods in tensorflow or some other libraries as comparision. 
 \end{document}
