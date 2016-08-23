@@ -65,7 +65,7 @@ def pick_locations():
 
 """
 Remove the not 3 files
-move to abort folder
+move to abort_csv folder
 """
 def mv_files(files):
     directories=['/home/byshen/CVST/2015_1/new/',\
@@ -82,5 +82,38 @@ def mv_files(files):
                 bashcmd = 'rm %s/%s' % (directory, file)
                 print bashcmd
                 os.system(bashcmd)
+"""
+Combine all three files into one in the
+"""
+def combine_files():
+    directories = ['/home/byshen/CVST/2015_1/new/', \
+                   '/home/byshen/CVST/2015_2/new/', \
+                   '/home/byshen/CVST/2015_3/new/']
+    all_csv = os.listdir(directories[0])
+    for i, fcsv in enumerate(all_csv):
+        # if i == 1:
+        #    break
+        print i, fcsv
+        readers = [ csv.reader(file(directories[i] + fcsv, 'rb')) \
+                   for i in range(3)]
+        writer = csv.writer(file('/home/byshen/CVST/data/' + fcsv, 'wb'))
 
-mv_files(pick_locations())
+        # print reader
+        flag = True
+        while flag:
+            try:
+                res = []
+                for reader in readers:
+                    res[len(res):len(res)] = reader.next()
+                writer.writerow(res)
+
+            except StopIteration as e:
+                flag = False
+
+    print "finished"
+
+    return
+
+
+# mv_files(pick_locations())
+combine_files()
