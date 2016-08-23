@@ -129,16 +129,24 @@ def getColNan():
 
     return res
 
+def lastElement(s):
+    return s[-1]
+
+def selectPosition():
+    f2 = open("stats/analysis.txt", "rb")
+    load_list = pickle.load(f2)
+    f2.close()
+
+    ranklist = sorted(load_list, key=lastElement, reverse=True)
+    for i in range(100):
+        print ranklist[i][0], '\t\t', np.average(ranklist[i][1]), '\t\t', \
+            np.max(ranklist[i][1]), '\t\t', ranklist[i][3]
 """
 Ranking all the files and calculate average traffic of each sensor
-
 """
 
-# transfer empty and 'X' values (nan)into 0
-# calculate each day with a number of nan values limit < 500/4030
-
-
 if __name__ == '__main__':
-    getColNan()
+    # getColNan()
     # checkFormat()
     # countNotPossible()
+    selectPosition()
