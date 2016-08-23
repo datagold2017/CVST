@@ -16,7 +16,7 @@ def checkFormat():
     Each file should be a 90*4320 matrix (90 days, 4320 data points per day)
     :return: True or False list
     """
-    directory = '2015_2/new/'
+    directory = 'data/'
     all_csv = os.listdir(directory)
     res = []
     file = open('stats/format.txt', 'wb')
@@ -26,7 +26,7 @@ def checkFormat():
         print i
         try:
             array = np.genfromtxt(directory + fcsv, delimiter=',')
-            if array.shape[0] == 4320 and array.shape[1] == 28:
+            if array.shape[0] == 4320 and array.shape[1] == 90:
                 res.append([fcsv, array.shape[0], array.shape[1], 1])
             else:
                 res.append([fcsv, array.shape[0], array.shape[1], 0])
@@ -78,6 +78,20 @@ def getNan(array):
 
     return res
 
+
+def nan2zero(array):
+    """
+    convert the array with nan values to zero
+    :param array:
+    :return: array with nan to zeros
+    """
+    for i in range(array.shape[0]):
+        for j in range(array.shape[1]):
+            if isNaN(array[i][j]):
+                array[i][j] = 0
+    return array
+
+
 def getColNan():
     """
     get # of nan values in each column
@@ -88,7 +102,7 @@ def getColNan():
     res = []
 
     for i, fcsv in enumerate(all_csv):
-        # if i == 1:
+        # if i == 5:
         #     break
         print i
         array = np.genfromtxt(directory + fcsv, delimiter=',')
@@ -98,17 +112,22 @@ def getColNan():
         # print np.sum(array)
         num_cnan = np.sum(cnan)
         print num_cnan
-        res.append((fcsv, cnan, num_cnan))
+        arrayWithoutNan = nan2zero(array)
+        total_traffic = np.sum(arrayWithoutNan)
+        res.append((fcsv, cnan, num_cnan, total_traffic))
+
+    file = open('stats/analysis.txt', 'wb')
+
+    pickle.dump(res, file)
+    file.close()
+    f2 = open("stats/analysis.txt", "rb")
+    load_list = pickle.load(f2)
+    f2.close()
+
+    for term in load_list:
+        print term[0], term[3]
 
     return res
-
-def nan2zero(array):
-    for i in range(array.shape[0]):
-        for j in range(array.shape[1]):
-            if isNaN(array[i][j]):
-                array[i][j] = 0
-    return array
-
 
 """
 Ranking all the files and calculate average traffic of each sensor
@@ -119,11 +138,7 @@ Ranking all the files and calculate average traffic of each sensor
 # calculate each day with a number of nan values limit < 500/4030
 
 
-def check():
-    return
-
-
 if __name__ == '__main__':
-    # getColNan()
-    checkFormat()
-    countNotPossible()
+    getColNan()
+    # checkFormat()
+    # countNotPossible()
