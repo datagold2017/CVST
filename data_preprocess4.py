@@ -8,6 +8,45 @@ Created on Mon Aug 23 00:42:24 2016
 import csv
 import os
 import numpy as np
+import pickle
+
+
+def checkFormat():
+    """
+    Each file should be a 90*4320 matrix (90 days, 4320 data points per day)
+    :return: True or False list
+    """
+    directory = 'data/'
+    all_csv = os.listdir(directory)
+    res = []
+    file = open('stats/format.txt', 'wb')
+    for i, fcsv in enumerate(all_csv):
+        if i == 10:
+            break
+        print i
+        try:
+            array = np.genfromtxt(directory + fcsv, delimiter=',')
+            if array.shape[0] == 4320 and array.shape[1] == 90:
+                res.append([fcsv, array.shape[0], array.shape[1], 1])
+            else:
+                res.append([fcsv, array.shape[0], array.shape[1], 0])
+        except:
+            res.append([fcsv, array.shape[0], array.shape[1], 0])
+
+    pickle.dump(res,file)
+    file.close()
+
+def countNotPossible():
+    f2 = open("stats/format.txt", "rb")
+    load_list = pickle.load(f2)
+    f2.close()
+    count = 0
+    for (k,v) in load_list.items():
+        if v == 0:
+            count += 1
+            print k
+    print count
+    return
 
 def isNaN(num):
     """
@@ -40,14 +79,22 @@ def getColNan():
     """
     directory = 'data/'
     all_csv = os.listdir(directory)
+    res = []
 
     for i, fcsv in enumerate(all_csv):
-        if i == 1:
-            break
+        # if i == 1:
+        #     break
         print i
         array = np.genfromtxt(directory + fcsv, delimiter=',')
-        print array
-        print getNan(array)
+#        print array
+        cnan = getNan(array)
+        # print cnan
+        # print np.sum(array)
+        num_cnan = np.sum(cnan)
+        print num_cnan
+        res.append((fcsv, cnan, num_cnan))
+
+    return res
 
 def nan2zero(array):
     for i in range(array.shape[0]):
@@ -71,5 +118,6 @@ def check():
 
 
 if __name__ == '__main__':
-    getColNan()
-
+    # getColNan()
+    checkFormat()
+    # countNotPossible()
