@@ -75,8 +75,7 @@ def mv_files(files):
     for directory in directories:
         for file in files:
             if os.path.exists(directory + file):
-                bashcmd = 'cp %s%s %s_%s' %(directory, file, \
-                                             directory, dest)
+                bashcmd = 'cp %s%s %s' %(directory, file, dest)
                 print bashcmd
                 os.system(bashcmd)
                 bashcmd = 'rm %s/%s' % (directory, file)
