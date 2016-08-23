@@ -16,17 +16,17 @@ def checkFormat():
     Each file should be a 90*4320 matrix (90 days, 4320 data points per day)
     :return: True or False list
     """
-    directory = 'data/'
+    directory = '2015_2/new/'
     all_csv = os.listdir(directory)
     res = []
     file = open('stats/format.txt', 'wb')
     for i, fcsv in enumerate(all_csv):
-        if i == 10:
-            break
+        # if i == 10:
+        #     break
         print i
         try:
             array = np.genfromtxt(directory + fcsv, delimiter=',')
-            if array.shape[0] == 4320 and array.shape[1] == 90:
+            if array.shape[0] == 4320 and array.shape[1] == 28:
                 res.append([fcsv, array.shape[0], array.shape[1], 1])
             else:
                 res.append([fcsv, array.shape[0], array.shape[1], 0])
@@ -41,10 +41,16 @@ def countNotPossible():
     load_list = pickle.load(f2)
     f2.close()
     count = 0
+    """
     for (k,v) in load_list.items():
         if v == 0:
             count += 1
             print k
+    """
+    for term in load_list:
+        if term[3] == 0:
+            print term
+            count += 1
     print count
     return
 
@@ -120,4 +126,4 @@ def check():
 if __name__ == '__main__':
     # getColNan()
     checkFormat()
-    # countNotPossible()
+    countNotPossible()

@@ -13,7 +13,7 @@ This is for first step to clean data, to modify data in a matrix format
 so that simply use numpy to process it.
 """
 def data2matrix():
-    directory = '/home/byshen/CVST/2015_3'
+    directory = '/home/byshen/CVST/2015_2'
     all_csv = os.listdir(directory+'/occ')
 
     if not os.path.exists(directory + '/new'):
@@ -22,14 +22,24 @@ def data2matrix():
     print len(all_csv)
 
     for i, fcsv in enumerate(all_csv):
-       # if i == 1:
-      #      break
         print i
         reader = csv.reader(file(directory + '/occ/' + fcsv, 'rb'))
         writer = csv.writer(file(directory + '/new/'+ fcsv, 'wb'))
+        # print reader
+        num_row = 0
         for index, line in enumerate(reader):
-            #print line[1:]
+            num_row += 1
+        print num_row
+        reader = csv.reader(file(directory + '/occ/' + fcsv, 'rb'))
+        for index, line in enumerate(reader):
+            """
             if index > 4:
+                # BUG existed here,
+                # not all csv file has 4 lines of explanation
+                # just choose the last 4320 line is fine
+                writer.writerow(line[1:len(line) - 1])
+            """
+            if index > num_row - 4320 - 1:
                 writer.writerow(line[1:len(line) - 1])
 
 def read_data():
