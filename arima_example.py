@@ -185,7 +185,7 @@ fig = plt.figure(figsize=(12,8))
 ax = fig.add_subplot(111)
 ax = cpi.plot(ax=ax)
 ax.legend()
-
+plt.show()
 
 # P-value of the unit-root test, resoundly rejects the null of no unit-root.
 
