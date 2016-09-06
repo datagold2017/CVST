@@ -1,0 +1,95 @@
+Results of Dickey-Fuller Test:
+Test Statistic                   -1.568686
+p-value                           0.499302
+#Lags Used                       37.000000
+Number of Observations Used    8602.000000
+Critical Value (5%)              -2.861876
+Critical Value (1%)              -3.431110
+Critical Value (10%)             -2.566949
+dtype: float64
+original finshed
+Results of Dickey-Fuller Test:
+Test Statistic                  -24.161713
+p-value                           0.000000
+#Lags Used                       36.000000
+Number of Observations Used    8602.000000
+Critical Value (5%)              -2.861876
+Critical Value (1%)              -3.431110
+Critical Value (10%)             -2.566949
+dtype: float64
+first difference finished
+Results of Dickey-Fuller Test:
+Test Statistic                  -27.487139
+p-value                           0.000000
+#Lags Used                       36.000000
+Number of Observations Used    8506.000000
+Critical Value (5%)              -2.861880
+Critical Value (1%)              -3.431119
+Critical Value (10%)             -2.566951
+dtype: float64
+seasonal first difference finished
+RUNNING THE L-BFGS-B CODE
+
+           * * *
+
+Machine precision = 2.220E-16
+ N =  2    M =  10
+ This problem is unconstrained.
+
+At X0         0 variables are exactly at the bounds
+
+At iterate    0    f=  7.10564E+00    |proj g|=  7.81837E-02
+
+At iterate    5    f=  7.05593E+00    |proj g|=  1.21868E-03
+
+At iterate   10    f=  6.97113E+00    |proj g|=  3.10416E-05
+
+           * * *
+
+Tit   = total number of iterations
+Tnf   = total number of function evaluations
+Tnint = total number of segments explored during Cauchy searches
+Skip  = number of BFGS updates skipped
+Nact  = number of active bounds at final generalized Cauchy point
+Projg = norm of the final projected gradient
+F     = final function value
+
+           * * *
+
+   N    Tit     Tnf  Tnint  Skip  Nact     Projg        F
+    2     11     15      1     0     0   1.010E-06   6.971E+00
+  F =  6.97111433
+
+CONVERGENCE: NORM_OF_PROJECTED_GRADIENT_<=_PGTOL
+
+ Cauchy                time 0.000E+00 seconds.
+ Subspace minimization time 0.000E+00 seconds.
+ Line search           time 1.580E+03 seconds.
+
+ Total User time 1.671E+03 seconds.
+
+                                 Statespace Model Results
+==========================================================================================
+Dep. Variable:                            traffic   No. Observations:                 8640
+Model:             SARIMAX(0, 1, 0)x(0, 1, 1, 96)   Log Likelihood              -60230.428
+Date:                            Tue, 06 Sep 2016   AIC                         120464.856
+Time:                                    14:05:56   BIC                         120478.984
+Sample:                                01-01-2015   HQIC                        120469.673
+                                     - 03-31-2015
+Covariance Type:                              opg
+==============================================================================
+                 coef    std err          z      P>|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+ma.S.L96      -0.9997      0.580     -1.724      0.085      -2.136       0.137
+sigma2      7.417e+04   4.28e+04      1.731      0.083   -9792.554    1.58e+05
+===================================================================================
+Ljung-Box (Q):                    10627.68   Jarque-Bera (JB):             16516.90
+Prob(Q):                              0.00   Prob(JB):                         0.00
+Heteroskedasticity (H):               0.21   Skew:                             0.65
+Prob(H) (two-sided):                  0.00   Kurtosis:                         9.69
+===================================================================================
+
+Warnings:
+[1] Covariance matrix calculated using the outer product of gradients (complex-step).
+
+Process finished with exit code 0
