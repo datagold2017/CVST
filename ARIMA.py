@@ -1,8 +1,3 @@
-"""
-Plot fig of 3 months by day and by week
-"""
-
-
 import matplotlib.pylab as plt
 import pandas as pd
 from statsmodels.tsa.stattools import adfuller
@@ -25,9 +20,8 @@ font = {'family': 'serif',
         }
 
 weekname = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-styles = ['-', '--', '-.', ':']
-colors = ['b', 'g', 'r', 'c', 'm', 'y', 'k', 'w']
-markers= ['o', 'v', '^', '<', '>', 'd', 's', 'p', '*']
+
+
 def getX(i, array):
     res = []
     j = i
@@ -87,48 +81,51 @@ def plotThreeMonths():
     return
 
 
-def plotThreeMonthEachWeekday():
+def plotFirstMonthEachWeekday():
     directory = 'top/'
     all_csv = os.listdir(directory)
     fig = plt.figure(figsize=(16, 10))
     for i, fcsv in enumerate(all_csv):
-        if i < 4:
-            continue
         print i, fcsv
-        array = np.genfromtxt(directory + fcsv, delimiter=',')
-        # print getNan(array)
-        array = util.nan2zero(array)
-        newa = util.divide_time(array, 180)  # 180*20 = 3600s = 1h
-        x = np.arange(newa.shape[0]) + 1
 
         for day in range(7):
+
+            array = np.genfromtxt(directory + fcsv, delimiter=',')
+
+            # print getNan(array)
+            array = util.nan2zero(array)
+
+            newa = util.divide_time(array, 180) # 180*20 = 3600s = 1h
+
+            x = np.arange(newa.shape[0]) + 1
+
             plt.subplot(2, 4, day + 1)
 
             # plt.subplot(1,1,1)
             plt.title('Traffic on ' + weekname[day], fontdict=font)
-            for lineno in range(13):
-                dayno = day + lineno*7
-                if dayno >= 90:
-                    break
-                if dayno in [0,1,2,32,46,75]:
-                    continue
-                plt.plot(x, newa[:, dayno], \
-                         marker= markers[lineno%len(markers)], \
-                         linestyle=styles[lineno%len(styles)], \
-                         color=colors[lineno%len(colors)], \
-                         markersize=3, \
-                         label=str(dayno))
-            plt.xlabel('time (h)', fontdict=font)
-            plt.title(fcsv)
-            plt.legend(loc=2,prop={'size':6})
-       # plt.show()
+            if day == 0:
+                plt.plot(x, newa[:, day + 28], 's-', color="blue")
+            else:
+                plt.plot(x, newa[:, day + 0], 's-', color="blue")
 
-        plt.savefig('pics/' + 'day' + fcsv + '_all' + '.png', dpi=100)
+            plt.plot(x, newa[:, day + 7], '*-', color="red")
+            plt.plot(x, newa[:, day + 14], 'd-', color="green")
+            plt.plot(x, newa[:, day + 21], '>-', color="black")
+            plt.xlabel('time (h)', fontdict=font)
+            # plt.ylabel('traffic', fontdict=font)
+            if day == 0:
+                plt.legend((str(day + 0 + 29), str(day + 7 + 1), str(day + 14 + 1), str(day + 21 + 1)),
+                           loc='upper right', prop={'size': 10})
+            else:
+                plt.legend((str(day + 0 + 1), str(day + 7 + 1), str(day + 14 + 1), str(day + 21 + 1)),
+                           loc='upper right', prop={'size': 10})
+
+            # plt.show()
+
+            plt.savefig('/home/byshen/CVST/pics/' + fcsv + '_all' + '.png', dpi=100)
         plt.cla()
         plt.clf()
     plt.close(fig)
 
 if __name__ == '__main__':
-    plotThreeMonthEachWeekday()
-
-
+    plotThreeMonths()

@@ -10,7 +10,11 @@
     <ConfirmationsSetting value="0" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
+<<<<<<< HEAD
   <component name="ProjectRootManager" version="2" project-jdk-name="Python 2.7.10 (/System/Library/Frameworks/Python.framework/Versions/2.7/bin/python2.7)" project-jdk-type="Python SDK" />
+=======
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 2.7.9 (/usr/bin/python2.7)" project-jdk-type="Python SDK" />
+>>>>>>> 066497a84247b40d2cf539dc2485f5ad0da75c2e
   <component name="PythonCompatibilityInspectionAdvertiser">
     <option name="version" value="1" />
   </component>
