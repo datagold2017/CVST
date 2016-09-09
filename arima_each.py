@@ -20,7 +20,6 @@ def selectDay(array, day=0):
     :return: the selected sequence for each day and tick out the atypical days
     """
     res = []
-    RES
 
 
     return res
