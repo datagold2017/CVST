@@ -19,12 +19,14 @@ ARIMA
 - [ ] ACF & PACF error analysis(ACF of the series gives correlations between x_t and x_{t-h})
     - [x] Plot
     - [x] season = # of samples per hour * 24
-    - [ ] \phi, \theta
-    - [ ] ARIMA(p, d, q) × (P, D, Q)S, p = non-seasonal AR order, d = non-seasonal differencing,
+    - [x] ARIMA(p, d, q) × (P, D, Q)S, p = non-seasonal AR order, d = non-seasonal differencing,
      q = non-seasonal MA order, P = seasonal AR order, D = seasonal differencing, Q = seasonal MA order, 
      and S = time span of repeating seasonal pattern.
-- [ ] Build the ARIMA model and do predicition
-
-- [ ] Tuning the parameters and calculate the accuracy
+- [x] Build the ARIMA model and do predicition
+- [x] Tuning the parameters and calculate the accuracy
 
 - [ ] Do the same for prediction in each day
+
+SVR-RBF
+
+- [ ] 
