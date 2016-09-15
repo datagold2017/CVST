@@ -36,7 +36,7 @@ def pick_locations():
         if j not in res:
             res.update({j:1})
         else:
-            res[j] +=1
+            res[j] += 1
     for k in csv3:
         if k not in res:
             res.update({k:1})

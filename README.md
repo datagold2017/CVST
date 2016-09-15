@@ -25,7 +25,9 @@ ARIMA
 - [x] Build the ARIMA model and do predicition
 - [x] Tuning the parameters and calculate the accuracy
 
-- [ ] Do the same for prediction in each day
+- [x] Do the same for prediction in each day
+- [ ] traffic with weather?
+- [ ] adaptive model, re-calibration
 
 SVR-RBF
 
